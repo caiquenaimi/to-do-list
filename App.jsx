@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   scroll: {
-    marginBottom: 20,
+    marginBottom: 24,
   },
   boxBtn: {
     flexDirection: "row",
@@ -134,5 +134,8 @@ const styles = StyleSheet.create({
   },
   text1: {
     marginRight: "auto",
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    width: 200,
   },
 });
