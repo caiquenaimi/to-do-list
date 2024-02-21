@@ -17,12 +17,20 @@ export default function App() {
     if (task.trim().length > 0) {
       setTasks([...tasks, { id: Math.random().toString(), value: task }]);
       setTask("");
+    } else {
+      alert("Preencha o campo de tarefa!");
     }
   };
 
   const removeTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
+
+  const updateTask = (taskId) => {
+    const task = tasks.find((task) => task.id === taskId);
+    setTask(task.value);
+    removeTask(taskId);
+  }
 
   return (
     <View style={styles.container}>
@@ -46,10 +54,13 @@ export default function App() {
       </View>
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
       {tasks.map((task) => (
-        <View style={styles.box} key={task.id}>
-          <Text>{task.value}</Text>
+        <View style={styles.boxBtn} key={task.id}>
+          <Text style={styles.text1}>{task.value}</Text>
           <TouchableOpacity style={styles.removeBtn} onPress={() => removeTask(task.id)}>
             <Text style={styles.remove}>🗑</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.editBtn} onPress={() => updateTask(task.id)}>
+            <Text style={styles.edit}>🖊</Text>
           </TouchableOpacity>
         </View>
       ))}
@@ -102,9 +113,26 @@ const styles = StyleSheet.create({
   scroll: {
     marginBottom: 20,
   },
+  boxBtn: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: 10,
+  },
   removeBtn: {
     backgroundColor: "red",
     padding: 10,
     borderRadius: 5,
+  },
+  editBtn: {
+    backgroundColor: "green",
+    padding: 10,
+    borderRadius: 5,
+  },
+  edit: {
+    fontSize: 20,
+  },
+  text1: {
+    marginRight: "auto",
   },
 });
